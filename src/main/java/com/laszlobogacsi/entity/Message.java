@@ -1,17 +1,19 @@
 package com.laszlobogacsi.entity;
 
-import java.util.Date;
+import com.laszlobogacsi.provider.ClockProvider;
+
+import java.time.LocalDateTime;
 
 public class Message {
     private long id;
     private String content;
-    private Date createdAt;
+    private LocalDateTime createdAt;
     private long userId;
 
     private Message(long id, String content, long userId) {
         this.id = id;
         this.content = content;
-        this.createdAt = new Date(); // create clock provider for testing
+        this.createdAt = ClockProvider.now(); // create clock provider for testing
         this.userId = userId;
     }
 
@@ -27,7 +29,7 @@ public class Message {
         return content;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 

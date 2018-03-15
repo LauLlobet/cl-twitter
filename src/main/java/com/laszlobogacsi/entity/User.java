@@ -18,6 +18,10 @@ public class User {
         return new User(id, name);
     }
 
+    public void follow(User user) {
+        followsIdList.add(user.getId());
+    }
+
     public long getId() {
         return id;
     }
@@ -31,8 +35,6 @@ public class User {
     }
 
 
-    public void follow(User user) {
-        followsIdList.add(user.getId());
-    }
+
 
 }

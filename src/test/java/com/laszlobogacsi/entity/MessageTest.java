@@ -1,10 +1,19 @@
 package com.laszlobogacsi.entity;
 
+import com.laszlobogacsi.provider.ClockProvider;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.time.LocalDateTime;
+
+import static org.junit.Assert.assertEquals;
 
 class MessageTest {
+    @BeforeEach
+    void setUp() {
+        ClockProvider.useFixedClockAt(LocalDateTime.parse("2018-03-15T16:20:35"));
+    }
+
     @Test
     void can_create_message() {
         String content = "Hello World!";
@@ -13,5 +22,6 @@ class MessageTest {
 
         assertEquals(message.getContent(), "Hello World!");
         assertEquals(message.getUserId(), 1L);
+        assertEquals(message.getCreatedAt(), LocalDateTime.parse("2018-03-15T16:20:35"));
     }
 }
