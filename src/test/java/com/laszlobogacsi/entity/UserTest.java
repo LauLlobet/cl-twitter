@@ -8,8 +8,16 @@ class UserTest {
 
     @Test
     void can_create_user() {
-        User user = User.create(1, "Alice");
-        assertEquals(user.getName(), "Alice");
-        assertEquals(user.getFollowsIdList().size(), 0);
+        User alice = User.create(1, "Alice");
+        assertEquals(alice.getName(), "Alice");
+        assertEquals(alice.getFollowsIdList().size(), 0);
+    }
+
+    @Test
+    void can_follow() {
+        User alice = User.create(1, "Alice");
+        User bob = User.create(2, "Bob");
+        alice.follow(bob);
+        assertEquals(alice.getFollowsIdList().get(0).longValue(), 2L);
     }
 }

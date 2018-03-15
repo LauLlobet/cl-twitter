@@ -29,4 +29,10 @@ public class User {
     public List<Long> getFollowsIdList() {
         return followsIdList;
     }
+
+
+    public void follow(User user) {
+        followsIdList.add(user.getId());
+    }
+
 }
