@@ -1,7 +1,5 @@
 package com.laszlobogacsi.entity;
 
-import com.laszlobogacsi.provider.ClockProvider;
-
 import java.time.LocalDateTime;
 
 public class Message {
@@ -10,15 +8,11 @@ public class Message {
     private LocalDateTime createdAt;
     private long userId;
 
-    private Message(long id, String content, long userId) {
+    public Message(long id, String content, long userId, LocalDateTime createdAt) {
         this.id = id;
         this.content = content;
-        this.createdAt = ClockProvider.now(); // create clock provider for testing
+        this.createdAt = createdAt;
         this.userId = userId;
-    }
-
-    public static Message create(long id, String content, long userId) {
-        return new Message(id, content, userId);
     }
 
     public long getId() {
