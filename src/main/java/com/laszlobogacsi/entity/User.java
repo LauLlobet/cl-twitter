@@ -8,15 +8,12 @@ public class User {
     private String name;
     private List<Long> followsIdList;
 
-    private User(long id, String name) {
+    public User(long id, String name) {
         this.id = id;
         this.name = name;
         this.followsIdList = new ArrayList<>();
     }
 
-    public static User create(long id, String name) {
-        return new User(id, name);
-    }
 
     public void follow(User user) {
         followsIdList.add(user.getId());
