@@ -1,6 +1,7 @@
 package com.laszlobogacsi;
 
 import com.laszlobogacsi.entity.Message;
+import com.laszlobogacsi.entity.MessageFactory;
 import org.junit.jupiter.api.Test;
 
 import java.time.Clock;
@@ -18,7 +19,7 @@ class MessageFactoryTest {
     @Test
     void factory_can_create_message() {
         MessageFactory factory = new MessageFactory(FIXED_CLOCK);
-        Message message = factory.createMessage(1, "Hello World!", 1);
+        Message message = factory.createMessage("Hello World!", "Bob");
         assertEquals(message.getCreatedAt(), NOW);
     }
 }

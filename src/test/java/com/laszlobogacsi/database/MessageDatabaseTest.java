@@ -18,21 +18,21 @@ class MessageDatabaseTest {
     }
 
     @Test
-    void has_empty_user_table_on_init() {
+    void has_empty_message_table_on_init() {
         assertEquals(db.getAllMessages().size(), 0);
     }
 
     @Test
-    void can_add_user_to_users_list() {
+    void can_add_message_to_message_list() {
         db.addMessage(mockMessage);
         assertEquals(db.getAllMessages().size(), 1);
     }
 
     @Test
-    void can_get_a_user_by_id() {
+    void can_get_a_message_by_userName() {
         db.addMessage(mockMessage);
-        given(mockMessage.getId()).willReturn(1L);
+        given(mockMessage.getUserName()).willReturn("Bob");
 
-        assertEquals(db.getMessageById(1), mockMessage);
+        assertEquals(db.getMessagesBy("Bob").get(0), mockMessage);
     }
 }

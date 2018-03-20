@@ -2,21 +2,19 @@ package com.laszlobogacsi.entity;
 
 import java.time.LocalDateTime;
 
+/**
+ * Message entity, that hold information for the message content the name of the user that created the message and
+ * the creation time
+ */
 public class Message {
-    private long id;
-    private String content;
-    private LocalDateTime createdAt;
-    private long userId;
+    private final String content;
+    private final LocalDateTime createdAt;
+    private final String userName;
 
-    public Message(long id, String content, long userId, LocalDateTime createdAt) {
-        this.id = id;
+    public Message(String content, String userName, LocalDateTime createdAt) {
         this.content = content;
         this.createdAt = createdAt;
-        this.userId = userId;
-    }
-
-    public long getId() {
-        return id;
+        this.userName = userName;
     }
 
     public String getContent() {
@@ -27,7 +25,7 @@ public class Message {
         return createdAt;
     }
 
-    public long getUserId() {
-        return userId;
+    public String getUserName() {
+        return userName;
     }
 }

@@ -4,7 +4,11 @@ import com.laszlobogacsi.entity.Message;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+/**
+ * Implementaiton of a simple in memory database represented by an ArrayList
+ */
 public class MessageDatabase {
     
     private List<Message> messages;
@@ -13,23 +17,26 @@ public class MessageDatabase {
         this.messages = new ArrayList<>();
     }
 
-    public void addMessage(Message user) {
-        this.messages.add(user);
+    public boolean addMessage(Message message) {
+        return this.messages.add(message);
     }
 
     public List<Message> getAllMessages() {
         return this.messages;
     }
 
-    public Message getMessageById(long id) {
-        return findMessageBy(id);
+    public List<Message> getMessagesBy(String userName) {
+        return findMessagesBy(userName);
     }
 
-
-    private Message findMessageBy(long id) {
+    /**
+     * Filters for a user name to return all the messages for the given user name (foreign key)
+     * @param userName String user name
+     * @return a list of messages
+     */
+    private List<Message> findMessagesBy(String userName) {
         return this.messages.stream()
-                .filter(message -> message.getId() == id)
-                .findFirst()
-                .orElse(null);
+                .filter(message -> message.getUserName().equals(userName))
+                .collect(Collectors.toList());
     }
 }
