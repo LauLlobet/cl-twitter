@@ -17,8 +17,8 @@
 - clone
 - cd cl-twitter
 - `gradle test`
-- `java cl-twitter.jar`
-- `--help` for list of commands
+- `java -jar cl-twitter.jar`
+- `-help` for list of commands
 
 ### Usage
 
@@ -39,3 +39,6 @@
 - All users will use the same terminal.
 - Non existing users will be created at their first message
 - Application starts with an empty list of users
+- User name must be unique
+- Displays the list of messages sorted by creation time in reversed order
+- Prints a human readable data displaying the elapsed time between now and the time of message creation
