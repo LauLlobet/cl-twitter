@@ -2,6 +2,9 @@ package com.laszlobogacsi.provider;
 
 import java.time.Clock;
 
+/**
+ * Clockprovider provides a singleton instance of a clock that can be used throughout the program
+ */
 public class ClockProvider {
     private static Clock clock = Clock.systemDefaultZone();
 
@@ -19,7 +22,5 @@ public class ClockProvider {
     public Clock getClock() {
         return clock;
     }
-
-
 
 }
