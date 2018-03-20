@@ -17,7 +17,7 @@
 - clone
 - cd cl-twitter
 - `gradle test`
-- `java -jar cl-twitter.jar`
+- `java -jar cltwitter-1.0.jar`
 - `-help` for list of commands
 
 ### Usage
