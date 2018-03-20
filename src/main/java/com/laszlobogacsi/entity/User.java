@@ -3,35 +3,31 @@ package com.laszlobogacsi.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * User entity, that hold information for the users' name, and a list of user names that the user follows
+ */
 public class User {
-    private long id;
-    private String name;
-    private List<Long> followsIdList;
+    private final String name;
+    private List<String> followsNameList;
 
-    public User(long id, String name) {
-        this.id = id;
+    /**
+     * Constructor assigns an empty follows list on creation
+     * @param name
+     */
+    public User(String name) {
         this.name = name;
-        this.followsIdList = new ArrayList<>();
+        this.followsNameList = new ArrayList<>();
     }
 
-
-    public void follow(User user) {
-        followsIdList.add(user.getId());
-    }
-
-    public long getId() {
-        return id;
+    public boolean follow(String userName)  {
+        return followsNameList.add(userName);
     }
 
     public String getName() {
         return name;
     }
 
-    public List<Long> getFollowsIdList() {
-        return followsIdList;
+    public List<String> getFollowsNameList() {
+        return new ArrayList<>(followsNameList);
     }
-
-
-
-
 }

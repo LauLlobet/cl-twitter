@@ -4,7 +4,7 @@ import com.laszlobogacsi.entity.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
@@ -30,10 +30,19 @@ class UserDatabaseTest {
     }
 
     @Test
-    void can_get_a_user_by_id() {
+    void can_get_a_user_by_name() {
         db.addUser(mockUser);
-        given(mockUser.getId()).willReturn(1L);
+        given(mockUser.getName()).willReturn("Bob");
 
-        assertEquals(db.getUserById(1), mockUser);
+        assertEquals(db.getUserByName("Bob"), mockUser);
+    }
+
+    @Test
+    void can_tell_if_user_is_present() {
+        db.addUser(mockUser);
+        given(mockUser.getName()).willReturn("Bob");
+
+        assertTrue(db.isPresent("Bob"));
+        assertFalse(db.isPresent("Alice"));
     }
 }

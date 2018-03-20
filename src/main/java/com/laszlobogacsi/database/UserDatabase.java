@@ -5,6 +5,9 @@ import com.laszlobogacsi.entity.User;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementaiton of a simple in memory database represented by an ArrayList
+ */
 public class UserDatabase {
     private List<User> users;
 
@@ -12,22 +15,30 @@ public class UserDatabase {
         this.users = new ArrayList<>();
     }
 
-    public void addUser(User user) {
-        this.users.add(user);
+    public boolean addUser(User user) {
+        return this.users.add(user);
     }
 
     public List<User> getAllUsers() {
         return this.users;
     }
 
-    public User getUserById(long id) {
-        return findUserBy(id);
+    public User getUserByName(String name) {
+        return findUserBy(name);
     }
 
+    public boolean isPresent(String name) {
+        return findUserBy(name) != null;
+    }
 
-    private User findUserBy(long id) {
+    /**
+     * Filters for a username to return a user for the given name
+     * @param name string user name
+     * @return a User object for the given unique name
+     */
+    private User findUserBy(String name) {
         return this.users.stream()
-                .filter(user -> user.getId() == id)
+                .filter(user -> name.equals(user.getName()))
                 .findFirst()
                 .orElse(null);
     }
