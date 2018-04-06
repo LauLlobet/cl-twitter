@@ -17,7 +17,8 @@ class InputHandlerTest {
 
     @Test
     void can_handle_post() {
-        InputHandler.inputHandler(mockTwitter, "Bob -> Hello World!");
+        InputHandler.inputHandler(mockTwitter, "Bob -> Hello World!"); // SMELL: shotgun cirurgy, adding a command implies modifying input and cli at the same time ¿Command object field instruction, args and execute call?
+                                                                                // SMELL: open close for idem fctory segons command
         verify(mockTwitter).post("Bob", "Hello World!");
     }
 

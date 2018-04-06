@@ -23,7 +23,7 @@ public class DatabaseService {
      * @param messageDatabase instance of messages database implemetation
      */
     public DatabaseService(UserDatabase userDatabase, MessageDatabase messageDatabase) {
-        this.userDatabase = userDatabase;
+        this.userDatabase = userDatabase;   // SMELL: low cohesion logical cohesion (one of the lowest)
         this.messageDatabase = messageDatabase;
     }
 
@@ -33,7 +33,7 @@ public class DatabaseService {
      * @param message Message object
      * @return boolean true if save is successful
      */
-    public boolean save(User user, Message message){
+    public boolean save(User user, Message message){    // SMELL: function name dont express purpuse, saveIfUserDontExistSaveMessageAlone
         if(!isExist(user.getName())) {
             return messageDatabase.addMessage(message) && userDatabase.addUser(user);
         }
@@ -74,7 +74,7 @@ public class DatabaseService {
      * @return boolean true if the follow is successful
      */
     public boolean setFollow(String userName, String followedUserName) {
-        return userDatabase.getUserByName(userName).follow(followedUserName);
+        return userDatabase.getUserByName(userName).follow(followedUserName); // SMELL: demeter? when using repository I doubt
     }
 
     /**
@@ -82,12 +82,12 @@ public class DatabaseService {
      * @param userName String user name
      * @return a list of message for a given user including all the followed users messages
      */
-    public List<Message> getWallFor(String userName) {
+    public List<Message> getWallFor(String userName) {  // SMELL: single responsability principle, wall should be a class that has acces to service
         User user = getUserByName(userName);
-        List<String> listOfFollowedUsers = user.getFollowsNameList();
-        listOfFollowedUsers.add(userName);
+        List<String> usersWithWallMessages = user.getFollowsNameList(); // SMELL: dont express purpose, naming of  following users confuses when adding the own user to it
+        usersWithWallMessages.add(userName);
 
-        return listOfFollowedUsers.stream()
+        return usersWithWallMessages.stream()
                 .map(this::readAllMessagesFor)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());

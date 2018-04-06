@@ -34,7 +34,7 @@ class ClTwitterTest {
     }
 
     @Test
-    void can_read_users_timeline_empty_by_default() {
+    void can_read_users_timeline_empty_by_default() { // SMELL: is it a baheviour test or a aceptance test of the whole app
         List<Message> expected = new ArrayList<>();
         List<Message> response = twitter.read("Bob");
         assertEquals(expected, response);

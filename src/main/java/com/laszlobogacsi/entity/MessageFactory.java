@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  * Creates messages and sets the creation time
  */
 public class MessageFactory {
-    private Clock clock;
+    private Clock clock;                            // SMELL: wrapper "primitives"(DEPENDENCIES)
 
     public MessageFactory(Clock clock) {
         this.clock = clock;

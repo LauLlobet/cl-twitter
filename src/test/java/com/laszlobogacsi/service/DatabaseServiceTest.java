@@ -22,6 +22,7 @@ class DatabaseServiceTest {
     private DatabaseService service;
     private User mockUser;
     private Message mockMessage;
+
     @BeforeEach
     void setUp() {
         mockUserdb = mock(UserDatabase.class);
@@ -34,15 +35,15 @@ class DatabaseServiceTest {
     @Test
     void can_save_Message_and_user_if_user_not_present() {
         given(mockUserdb.isPresent(any())).willReturn(false);
-        given(mockUserdb.addUser(any())).willReturn(true);
+        given(mockUserdb.addUser(any())).willReturn(true);     // STUB retorna contingut i mock comprova crides
         given(mockMessagedb.addMessage(any())).willReturn(true);
 
-        assertTrue(service.save(mockUser, mockMessage));
+        assertTrue(service.save(mockUser, mockMessage));// SMELL: is a flag a command request smell, alternatives: throw
     }
 
     @Test
     void can_not_save_a_user_if_already_present() {
-        given(mockUserdb.isPresent(any())).willReturn(true);
+        given(mockUserdb.isPresent(any())).willReturn(true);// SMELL: not separated into preparation, action, verification
         service.save(mockUser, mockMessage);
         verify(mockUserdb, times(0)).addUser(mockUser);
         verify(mockMessagedb, times(1)).addMessage(mockMessage);
@@ -50,7 +51,7 @@ class DatabaseServiceTest {
 
     @Test
     void can_get_a_user_by_name() {
-        given(mockUserdb.getUserByName(any())).willReturn(mockUser);
+        given(mockUserdb.getUserByName(any())).willReturn(mockUser);// SMELL: *** facade or man in the middle? ***
         given(mockUser.getName()).willReturn("Bob");
         assertEquals(service.getUserByName("Bob"), mockUser);
     }

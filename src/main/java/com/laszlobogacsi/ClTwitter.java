@@ -20,7 +20,7 @@ public class ClTwitter {
      * Constructor with injected database service
      * @param dbService instance that delegates towards other databases
      */
-    public ClTwitter(DatabaseService dbService) {
+    public ClTwitter(DatabaseService dbService) {               //SMELL: it looks like a man in the middle
         this.dbService = dbService;
     }
 
@@ -32,9 +32,10 @@ public class ClTwitter {
      */
     public void post(String userName, String messageContent) {
         Message message = messageFactory.createMessage(messageContent, userName);
-        if(!dbService.isExist(userName)) {
-            dbService.save(new User(userName), message);
-        } else {
+        if(!dbService.isExist(userName)) {                          // SMELL: single point of truth this if is present in save as well
+            dbService.save(new User(userName), message);            // SMELL: CLI responsability class doing bussines logic SRP,
+            // SMELL: user and message usually go together, data clump. Looks like repository mapped to bussines logic
+        } else {                                                    // SMELL: use of else
             dbService.save(dbService.getUserByName(userName), message);
         }
     }

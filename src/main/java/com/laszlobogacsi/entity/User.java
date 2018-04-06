@@ -6,8 +6,20 @@ import java.util.List;
 /**
  * User entity, that hold information for the users' name, and a list of user names that the user follows
  */
-public class User {
+/*
+public class UserName{
     private final String name;
+
+    public UserName(String name) {
+        this.name = name;
+    }
+
+    public String asString(){
+        return name;s
+    }
+}*/
+public class User {
+    private final String name; // SMELL: primitive obsession
     private List<String> followsNameList;
 
     /**

@@ -16,7 +16,7 @@ import static com.laszlobogacsi.util.Utils.printHelp;
  */
 public class InputHandler {
     private static Clock clock = ClockProvider.getInstance().getClock();
-    public static void inputHandler(ClTwitter twitter, String input) {
+    public static void inputHandler(ClTwitter twitter, String input) { //SMELL: SRP, needs collaborator to extract commands , no console
         // post
         if (input.contains("->")) {
             String[] commands = input.split("\\s+->\\s+");
